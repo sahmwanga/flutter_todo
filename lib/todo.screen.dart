@@ -8,6 +8,9 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
+  // Text(snapshot.data[index].id.toString()),
+  //                       Text(snapshot.data[index].title),
+  //                       Text("Completed: ${snapshot.data[index].completed}"),
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -17,13 +20,16 @@ class _TodoScreenState extends State<TodoScreen> {
             return ListView.builder(
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    child: Column(
-                      children: [
-                        Text(snapshot.data[index].id.toString()),
-                        Text(snapshot.data[index].title),
-                        Text("Completed: ${snapshot.data[index].completed}"),
-                      ],
+                  return Card(
+                    child: ListTile(
+                      leading: Text("${snapshot.data[index].id}"),
+                      title: Text(snapshot.data[index].title),
+                      subtitle: Text(
+                        "Completed: ${snapshot.data[index].completed}",
+                        style: snapshot.data[index].completed
+                            ? TextStyle(color: Colors.green)
+                            : TextStyle(color: Colors.red),
+                      ),
                     ),
                   );
                 });
